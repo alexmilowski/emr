@@ -52,7 +52,7 @@ Sync the output:
 
    aws s3 sync s3://mybucket/multiply/output/ multiply/output/
    
-You should now have 7 files:
+You should now have 4 files:
 
     job/output/_SUCCESS
     job/output/part-00000
