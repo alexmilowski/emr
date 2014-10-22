@@ -1,8 +1,10 @@
+# Map Task Input Splitting #
+
 This example shows how map tasks get their input from splitting the input files.  In this example, we'll 
 just count the lines received via a map-only step (i.e., no reduce step) and the output will just consist
 of that count.  You'll see the output of each map task and how much of the input it received.
 
-# SETUP #
+# Setup #
 
 If you don't have a cluster running, you'll need to start one (see main setup page).
 
