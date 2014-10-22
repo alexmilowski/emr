@@ -1,6 +1,6 @@
 # SETUP #
 
-Install the AWS CLI with 
+Install the [AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/) with 
 
     sudo pip install awscli
 
