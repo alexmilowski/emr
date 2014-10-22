@@ -50,11 +50,11 @@ Sync the output:
 
 You should now have 7 files:
 
-   job/output/_SUCCESS
-   job/output/part-00000
-   job/output/part-00001
-   job/output/part-00002
-   job/output/part-00003
-   job/output/part-00004
-   job/output/part-00005
-   
+    job/output/_SUCCESS
+    job/output/part-00000
+    job/output/part-00001
+    job/output/part-00002
+    job/output/part-00003
+    job/output/part-00004
+    job/output/part-00005
+
