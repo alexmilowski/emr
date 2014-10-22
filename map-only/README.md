@@ -6,7 +6,9 @@ of that count.  You'll see the output of each map task and how much of the input
 
 # Setup #
 
-If you don't have a cluster running, you'll need to start one (see main setup page).
+If you don't have a cluster running, you'll need to start one (see main setup page).  You also need a bucket for the code, input, and output.
+
+# Running the Example #
 
 ## Step 1 ##
     
