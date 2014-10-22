@@ -30,6 +30,10 @@ You can start a simple test cluster by doing the following:
 The command will return the "Cluster ID" that you will need for further manipulations including to terminating the cluster.  You can always find this via the command:
 
     aws emr list-clusters --active
+    
+You can terminate a cluster by:
+
+    aws emr terminate-clusters --cluster-id <cluster-id>
 
 The documentation examples consistently use the bucket name 'mybucket'.  You'll need to replace that with your bucket name to get the commands to work.
 
