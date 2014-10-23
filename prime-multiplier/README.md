@@ -20,7 +20,7 @@ In this example, we'll multiple 1,000,000 integers between 1 and 1000
 You'll need to setup input to run the job and so we'll create a directory with some input:
 
     mkdir -p multiply/input
-    python generate-input.py 1000 100000 > multiply/input/numbers.txt
+    python generate-input.py 1000 1000000 > multiply/input/numbers.txt
     
 Now we need to store the input:
 
