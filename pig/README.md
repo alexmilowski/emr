@@ -25,7 +25,7 @@ We need to store the pig script into our bucket:
     
 Add the step to run the PIG script:
 
-    aws emr add-steps --cluster-id <your-id> --steps Type=PIG,Name='PIG Log Files',ActionOnFailure=CONTINUE,Args=-f,s3://mybucket/reports.pig,-p,INPUT=s3://elasticmapreduce/samples/pig-apache/input,-p,OUTPUT=s3://mybucket/pig/output
+    aws emr add-steps --cluster-id <your-id> --steps Type=PIG,Name='PIG Log Files',ActionOnFailure=CONTINUE,Args=-[f,s3://mybucket/reports.pig,-p,INPUT=s3://elasticmapreduce/samples/pig-apache/input,-p,OUTPUT=s3://mybucket/pig/output]
 
 This command returns the step id that you can use for further monitoring.  If you use an 'm1.medium' instance type, this job should take 10 minutes to process and 13 minutes of elapsed time.
 
