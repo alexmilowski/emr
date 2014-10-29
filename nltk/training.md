@@ -1,4 +1,4 @@
-# Experiments to Understand Training #
+# Training and Using a Classifier #
 
 ## Getting an Experimental Data Set ##
 
@@ -8,12 +8,12 @@ The input format tab-delimited file of the format:
     1       1       A series of escapades demonstrating the adage that what is good for the goose is also good for the gander , some of which occasionally amuses but none of which amounts to much of a story .    1
     32      1       good for the gander , some of which occasionally amuses but none of which amounts to much of a story    2
 
-An example annotated traning set is the [Kaggle Movie Set Review Challenge](https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews).  In this data set is:
+An example annotated training set is the [Kaggle Movie Set Review Challenge](https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews).  In this data set is:
 
   * train.tsv - an annotated training set
   * test.tsv - a test input file that is unannotated
   
-## Generating Wordcounts ##
+## Generating Word Counts ##
 
 From your input data, you can use `wordcounts.py` to generate a file containing the word counts from any input data set (e.g., `train.tsv`).  The output is
 one line for each word with the count of occurrences over the whole input data set.
@@ -22,11 +22,11 @@ one line for each word with the count of occurrences over the whole input data s
 
 The classifier requires as input:
 
-  * a list of stopwords (commas seperated)
+  * a list of stop words (commas separated)
   * a list of words (the output of wordcount.py will work)
   * a subset of feature words to use
   * the input training set
-  * a filename to store the classifier
+  * a file name to store the classifier
   
 For example:
 
