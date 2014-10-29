@@ -30,7 +30,7 @@ The classifier requires as input:
   
 For example:
 
-   python train.py stopwords.txt wordcounts.txt 1,250 train.tsv classifier-250.pickle
+    python train.py stopwords.txt wordcounts.txt 1,250 train.tsv classifier-250.pickle
    
 will train the model using the feature words of the first 250 words in wordcounts.txt
 
@@ -38,7 +38,7 @@ will train the model using the feature words of the first 250 words in wordcount
 
 You can test your classifier against the training data as follows:
 
-   python test.py classifier-250.pickle stopwords.txt wordcounts.txt 1,250 train.tsv
+    python test.py classifier-250.pickle stopwords.txt wordcounts.txt 1,250 train.tsv
    
 This will output the incorrect classifications and a statistic for how many have been misclassified.
 
