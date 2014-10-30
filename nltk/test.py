@@ -4,24 +4,23 @@ import sets
 import nltk
 
 # Local
-import stopwords
 import featureset
 
 classifierFilename = sys.argv[1]
-stopWordsFilename = sys.argv[2]
-wordcountFilename = sys.argv[3]
-rangeSpec = sys.argv[4].split(",")
+wordlistFilename = sys.argv[2]
+rangeSpec = sys.argv[3].split(",")
 wordStart = int(rangeSpec[0])
 wordEnd = int(rangeSpec[1])
-dataFilename = sys.argv[5]
+dataFilename = sys.argv[4]
 
 f = open(classifierFilename,"rb")
 classifier = pickle.load(f)
 f.close()
 
-stopWords = stopwords.load(stopWordsFilename)
+stopWords = nltk.corpus.stopwords.words('english')
+stemmer = nltk.stem.lancaster.LancasterStemmer()
 
-featureWords = featureset.load(wordcountFilename,wordStart,wordEnd)
+featureWords = featureset.load(wordlistFilename,wordStart,wordEnd)
 
 reviews = []
 data = open(dataFilename,"r")
@@ -35,6 +34,8 @@ missed = 0
 for line in data:
    parts = line.split("\n")[0].split("\t")
    wordlist = [e.lower() for e in nltk.word_tokenize(parts[2]) if len(e) >= 3 and not e.lower() in stopWords]
+   for i in range(len(wordlist)):
+      wordlist[i] = stemmer.stem(wordlist[i])
    c = int(classifier.classify(extractFeatures(wordlist)))
    if len(parts) > 3:
       a = int(parts[3])

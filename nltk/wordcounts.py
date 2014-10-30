@@ -3,14 +3,11 @@ import nltk
 import sets
 import operator
 
-# Local
-import stopwords
+inputFilename = sys.argv[1];
+outputFilename = sys.argv[2];
 
-stopWordFilename = sys.argv[1];
-inputFilename = sys.argv[2];
-outputFilename = sys.argv[3];
-
-stopWords = stopwords.load(stopWordFilename);
+stopWords = nltk.corpus.stopwords.words('english')
+stemmer = nltk.stem.lancaster.LancasterStemmer()
 
 words = {}
 
@@ -21,6 +18,7 @@ inputData.readline();
 for line in inputData:
    parts = line.split("\t")
    for word in [e.lower() for e in nltk.word_tokenize(parts[2]) if len(e) >= 3 and not e.lower() in stopWords]:
+      word = stemmer.stem(word)
       words[word] = words[word] + 1 if word in words else 1
 
 inputData.close()

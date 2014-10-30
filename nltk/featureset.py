@@ -8,7 +8,7 @@ def load(filename,start,end):
       count += 1
       if count < start:
          continue
-      if count > end:
+      if end>start and count > end:
          break
       parts = line.split("\n")[0].split("\t")
       featureWords.add(parts[0])
