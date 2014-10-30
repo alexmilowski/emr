@@ -31,6 +31,7 @@ extractFeatures = featureset.makeExtractor(featureWords)
 
 count = 0
 missed = 0
+variance = 0;
 for line in data:
    parts = line.split("\n")[0].split("\t")
    wordlist = [e.lower() for e in nltk.word_tokenize(parts[2]) if len(e) >= 3 and not e.lower() in stopWords]
@@ -42,6 +43,7 @@ for line in data:
       count += 1
       if c != a:
          missed += 1
+         variance += abs(c-a);
          print parts[0]+"\t"+(",".join(reduce(lambda l,w: l+[w] if w in featureWords else l,wordlist,[])))+"\t"+parts[2]+"\t"+str(a)+"\t"+str(c)
    else:
       print parts[0]+"\t"+str(c)
@@ -49,4 +51,4 @@ for line in data:
 data.close()
 
 if count>0:
-   print "{0} % missed ".format(100* (missed*1.0 / count))
+   print "{0} % missed, variance {1} ".format(100* (missed*1.0 / count), variance*1.0/missed)
