@@ -22,7 +22,6 @@ one line for each word with the count of occurrences over the whole input data s
 
 The classifier requires as input:
 
-  * a list of stop words (commas separated)
   * a list of words (the output of wordcount.py will work)
   * a subset of feature words to use
   * the input training set
@@ -30,7 +29,7 @@ The classifier requires as input:
   
 For example:
 
-    python train.py stopwords.txt wordcounts.txt 1,250 train.tsv classifier-250.pickle
+    python train.py wordcounts.txt 1,250 train.tsv classifier-250.pickle
    
 will train the model using the feature words of the first 250 words in wordcounts.txt
 
@@ -38,15 +37,15 @@ will train the model using the feature words of the first 250 words in wordcount
 
 You can test your classifier against the training data as follows:
 
-    python test.py classifier-250.pickle stopwords.txt wordcounts.txt 1,250 train.tsv
+    python test.py classifier-250.pickle wordcounts.txt 1,250 train.tsv
    
 This will output the incorrect classifications and a statistic for how many have been misclassified.
 
 You can use the classifier by loading the stop words and loading your features:
 
-    import stopwords,featureset
+    import featureset
     
-    stopWords = stopwords.load("stopwords.txt")
+    stopWords = nltk.corpus.stopwords.words('english')
     featureWords = featureset.load("wordcounts.txt",1,250)
 
 making a feature extractor:
@@ -59,6 +58,10 @@ and running the classifier:
     classifier = pickle.load(f)
     f.close()
 
+    stemmer = nltk.stem.lancaster.LancasterStemmer()
+    
     wordlist = [e.lower() for e in nltk.word_tokenize("this movie was awful") if len(e) >= 3 and not e.lower() in stopWords]
+    for i in range(len(wordlist)):
+       wordlist[i] = stemmer.stem(wordlist[i])
     c = int(classifier.classify(extractFeatures(wordlist)))
 
