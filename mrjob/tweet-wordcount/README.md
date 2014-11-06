@@ -12,9 +12,15 @@ First, you need to store the bootstrap script into S3:
     
 The you just start the cluster with `--bootstrap-actions` to specify that script.  For example, a cluster (1 master, 2 cores, m1.medium) can be created as follows:
 
-    aws emr create-cluster --ami-version 3.2.1 --instance-groups InstanceGroupType=MASTER,InstanceCount=1,InstanceType=m1.medium InstanceGroupType=CORE,InstanceCount=2,InstanceType=m1.medium --name "mrjob Test Cluster" --log-uri s3://mybucket/logs/ --enable-debugging --tags Name=emr --bootstrap-actions Path=s3://mybucket/bootstrap-mrjob.sh,Name="Setup mrjob / NLTK"    
+    aws emr create-cluster --ami-version 3.2.3 --instance-groups InstanceGroupType=MASTER,InstanceCount=1,InstanceType=m1.medium InstanceGroupType=CORE,InstanceCount=2,InstanceType=m1.medium --name "mrjob Test Cluster" --log-uri s3://mybucket/logs/ --enable-debugging --tags Name=emr --bootstrap-actions Path=s3://mybucket/bootstrap-mrjob.sh,Name="Setup mrjob / NLTK"    
 
-# Running the Example #
+# Running the Example Locally #
+
+The tweets are stored as JSON and we'll need to extract the tweet text.  We can pipe that output direcly into the mrjob program:  
+
+    python ../../tweet-wordcount/format-tweets.py ../../tweet-wordcount/microsoft-2014-10-07.json | python mrjobTweetWordCount.py
+
+# Running the Example on EMR #
 
 ## Step 1 ##
 
@@ -45,6 +51,6 @@ Note: Remember to replace <jobflow-id> with the ID of the cluster.
 
 If you want to store the output on S3, just add `--output` and `--no-output` parameters:
 
-    python mrjobTweetWordCount.py -c mrjob.conf -r emr  --emr-job-flow-id=<jobflow-id> --output-dir=s3://mybucket/tweet-wc/output/ --no-output s3://milowski-emr/tweet-wc/input/
+    python mrjobTweetWordCount.py -c mrjob.conf -r emr  --emr-job-flow-id=<jobflow-id> --output-dir=s3://mybucket/tweet-wc/output/ --no-output s3://mybucket/tweet-wc/input/
 
 If you do not specify a job flow identifier, a cluster will be created for you but you will have to wait for it to be setup and bootstrapped.
