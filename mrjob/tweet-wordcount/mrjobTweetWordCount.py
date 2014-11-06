@@ -1,17 +1,6 @@
 from mrjob.job import MRJob
 import re
 
-prefixes = [".","\"","("]
-suffixes = [".",",","!",":","?","\"",")"]
-def adjustWord(word):
-   if len(word)>0:
-      if word[0] in prefixes:
-         word = word[1:]
-   if len(word)>0:
-      if word[-1] in suffixes:
-         word = word[0:-1]
-   return word
-
 class MRTweetWordCount(MRJob):
 
     def mapper(self, _, line):
