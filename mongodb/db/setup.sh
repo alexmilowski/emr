@@ -1,3 +1,3 @@
 #!/bin/bash
-mkdir data
-mkdir log
+mkdir -p data
+mkdir -p log
