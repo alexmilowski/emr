@@ -57,6 +57,8 @@ Setup your job:
 Run the job by saving it back to S3:
 
     counts.saveAsTextFile("s3://mybucket/spark-output/")
+
+Note: Make sure you change 'mybucket' to your bucket name.
     
     
 # Wiki Page Counts #
@@ -79,10 +81,41 @@ A sample of the type of data stored in Wikistat is shown below.
 
 Because the full Wikistat dataset is fairly large, we have excerpted a single file and copied it to the Amazon S3 bucket at https://s3.amazonaws.com/bigdatademo/sample/wiki/pagecounts-20100212-050000.gz. In our queries, we will parse the data file and sort the dataset based on number of pageviews.
 
+The first steps are the same as before. If you already have a shell running, you can skip these steps.
+
+## Step 1 ##
+
+You'll be running the spark client on the master.  Login to to your master by finding the public DNS (e.g. ec2-nn-nn-nn-nn.compute-1.amazonaws.com) using your key:
+
+    ssh hadoop@ec2-nn-nn-nn-nn.compute-1.amazonaws.com -i mykey.pem
+
+## Step 2 ##
+
+Run the python client for Spark:
+
+    MASTER=yarn-client /home/hadoop/spark/bin/pyspark
+    
+and then wait till you see:
+
+    Welcome to
+          ____              __
+         / __/__  ___ _____/ /__
+        _\ \/ _ \/ _ `/ __/  '_/
+       /__ / .__/\_,_/_/ /_/\_\   version 1.1.0
+          /_/
+    
+    Using Python version 2.6.9 (unknown, Mar 28 2014 00:06:37)
+    SparkContext available as sc.
+    >>> 
+    
+## Step 3 ##
+
 Here is the python code for that same example:
 
     data = sc.textFile("s3://bigdatademo/sample/wiki/")
     output = data.map(lambda line: line.split(" ")).map(lambda tuple: (tuple[1],int(tuple[2]))).reduceByKey(lambda a, b: a + b)
     output.saveAsTextFile("s3://mybucket/wiki-output")
     
-Try it yourself.  It takes about 5 minutes to process on small cluster.
+It takes about 5 minutes to process on small cluster.
+
+Note: Make sure you change 'mybucket' to your bucket name.
