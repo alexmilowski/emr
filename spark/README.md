@@ -63,7 +63,7 @@ Note: Make sure you change 'mybucket' to your bucket name.
     
 # Wiki Page Counts #
 
-From the [AWS Blog]http://aws.amazon.com/articles/Elastic-MapReduce/4926593393724923) :
+From the [AWS Blog](http://aws.amazon.com/articles/Elastic-MapReduce/4926593393724923) :
 
 Wikistat contains Wikipedia article traffic statistics covering a 16-month period from October 1, 2008 to February 6, 2010. The full data set is online at http://aws.amazon.com/datasets/4182. The data in Wikistat is formatted as follows:
 
