@@ -58,3 +58,31 @@ Run the job by saving it back to S3:
 
     counts.saveAsTextFile("s3://mybucket/spark-output/")
     
+    
+# Wiki Page Counts #
+
+From the [AWS Blog]http://aws.amazon.com/articles/Elastic-MapReduce/4926593393724923) :
+
+Wikistat contains Wikipedia article traffic statistics covering a 16-month period from October 1, 2008 to February 6, 2010. The full data set is online at http://aws.amazon.com/datasets/4182. The data in Wikistat is formatted as follows:
+
+  * Each log file is named with the date and time of collection: pagecounts-20090430-230000.gz.
+  * Each line in the log file has four fields: projectcode, pagename, pageviews, and bytes.
+  
+A sample of the type of data stored in Wikistat is shown below.
+
+    en Barack_Obama 997 123091092
+    en Barack_Obama%27s_first_100_days 8 850127
+    en Barack_Obama,_Jr 1 144103
+    en Barack_Obama,_Sr. 37 938821
+    en Barack_Obama_%22HOPE%22_poster 4 81005
+    en Barack_Obama_%22Hope%22_poster 5 102081
+
+Because the full Wikistat dataset is fairly large, we have excerpted a single file and copied it to the Amazon S3 bucket at https://s3.amazonaws.com/bigdatademo/sample/wiki/pagecounts-20100212-050000.gz. In our queries, we will parse the data file and sort the dataset based on number of pageviews.
+
+Here is the python code for that same example:
+
+    data = sc.textFile("s3://bigdatademo/sample/wiki/")
+    output = data.map(lambda line: line.split(" ")).map(lambda tuple: (tuple[1],int(tuple[2]))).reduceByKey(lambda a, b: a + b)
+    output.saveAsTextFile("s3://mybucket/wiki-output")
+    
+Try it yourself.  It takes about 5 minutes to process on small cluster.
